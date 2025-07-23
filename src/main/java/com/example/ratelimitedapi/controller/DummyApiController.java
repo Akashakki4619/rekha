@@ -67,11 +67,11 @@ public class DummyApiController {
         String clientIp = getClientIpAddress();
         Map<String, Object> response = new HashMap<>();
         response.put("clientIp", clientIp);
-        response.put("availableTokens", Map.of(
-            "dummy-get", rateLimitingService.getAvailableTokens("dummy-get:" + clientIp),
-            "dummy-post", rateLimitingService.getAvailableTokens("dummy-post:" + clientIp),
-            "dummy-get-by-id", rateLimitingService.getAvailableTokens("dummy-get-by-id:" + clientIp)
-        ));
+        Map<String, Long> availableTokens = new HashMap<>();
+        availableTokens.put("dummy-get", rateLimitingService.getAvailableTokens("dummy-get:" + clientIp));
+        availableTokens.put("dummy-post", rateLimitingService.getAvailableTokens("dummy-post:" + clientIp));
+        availableTokens.put("dummy-get-by-id", rateLimitingService.getAvailableTokens("dummy-get-by-id:" + clientIp));
+        response.put("availableTokens", availableTokens);
         response.put("rateLimitInfo", "10 requests per minute per endpoint");
         response.put("timestamp", LocalDateTime.now());
         
