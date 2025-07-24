@@ -1,0 +1,21 @@
+server:
+  port: 8081
+  address: 0.0.0.0
+
+spring:
+  application:
+    name: rate-limited-api
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.example.ratelimitedapi: DEBUG
+    org.springframework.web: INFO
